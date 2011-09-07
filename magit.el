@@ -5461,9 +5461,9 @@ even if `magit-set-upstream-on-push's value is `refuse'."
                                     (eq magit-set-upstream-on-push 'askifnotset)))
                            (yes-or-no-p "Set upstream while pushing? "))))))
         (apply 'magit-run-git-async "push" "-v" push-remote
-               (if ref-branch
-                   (format "%s:%s" branch ref-branch)
-                 branch)
+;;               (if ref-branch
+;;                   (format "%s:%s" branch ref-branch)
+;;                 branch)
                (if set-upstream-on-push
                    (cons "--set-upstream" magit-custom-options)
                  magit-custom-options))
@@ -5535,7 +5535,6 @@ With a prefix argument amend to the commit at HEAD instead.
 
 (defun magit-commit-add-log ()
   "Add a template for the current hunk to the commit message buffer."
-  (interactive)
   (let* ((section (magit-current-section))
          (fun (if (eq (magit-section-type section) 'hunk)
                   (save-window-excursion
