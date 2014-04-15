@@ -5787,7 +5787,7 @@ Also see option `magit-set-upstream-on-push'."
            (setq magit-custom-options (cons "-u" magit-custom-options))))
     (magit-run-git-async
      "push" "-v" used-remote
-     (if used-branch (format "%s:%s" branch used-branch) branch)
+     (if used-branch (format "%s" branch) branch)
      magit-custom-options)))
 
 ;;;;; Committing
