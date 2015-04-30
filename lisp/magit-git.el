@@ -733,6 +733,12 @@ which is different from the current branch and still exists."
               ((string-prefix-p "refs/heads/" merge)
                (concat "refs/remotes/" remote "/" (substring merge 11))))))))
 
+(cl-defun magit-get-untracked-ref (&optional branch)
+  (when (or branch (setq branch (magit-get-current-branch)))
+    (let ((remote (magit-get "branch" branch "remote")))
+      (unless (equal remote ".")
+        (concat remote "/" branch)))))
+
 (cl-defun magit-get-tracked-branch
     (&optional (branch (magit-get-current-branch)))
   (when branch
