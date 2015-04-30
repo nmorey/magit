@@ -1119,7 +1119,7 @@ These sections can be expanded to show the respective commits."
 
 (defun magit-insert-unpushed-commits ()
   "Insert section showing unpushed commits."
-  (-when-let (tracked (magit-get-tracked-ref))
+  (-when-let (tracked (magit-get-remote-branch))
     (magit-insert-section (unpushed)
       (magit-insert-heading "Unpushed commits:")
       (magit-insert-log (concat tracked "..HEAD")

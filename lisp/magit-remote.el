@@ -179,7 +179,7 @@ then read the remote."
   "Push the current branch to its upstream branch.
 If the upstream isn't set, then read the remote branch."
   (interactive (magit-push-read-args t t))
-  (magit-push branch remote remote-branch args))
+  (magit-push branch remote branch args))
 
 ;;;###autoload
 (defun magit-push (branch remote &optional remote-branch args)
