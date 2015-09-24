@@ -379,6 +379,7 @@ branch as default."
                   magit-diff-select-algorithm)
               (?o "Output directory" "--output-directory="))
   :actions  '((?p "Format patches"   magit-format-patch)
+              (?P "Send patches"     magit-my-patch)
               (?r "Request pull"     magit-request-pull))
   :default-action 'magit-format-patch)
 
@@ -398,6 +399,19 @@ HEAD but not from the specified commit)."
                (format "%s~..%s" range range))))
          (magit-patch-arguments)))
   (magit-run-git-no-revert "format-patch" range args))
+
+;;;###autoload
+(defun magit-my-patch (range args)
+  "Create patches for the commits in RANGE."
+  (interactive
+   (list (-if-let (revs (magit-region-values 'commit))
+             (concat (car (last revs)) "^.." (car revs))
+           (let ((range (magit-read-range-or-commit "Format range or commit")))
+             (if (string-match-p "\\.\\." range)
+                 range
+               (format "%s~..%s" range range))))
+         (magit-patch-arguments)))
+  (magit-run-git-no-revert "patch" range args))
 
 ;;;###autoload
 (defun magit-request-pull (url start end)
