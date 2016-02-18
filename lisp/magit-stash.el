@@ -188,10 +188,7 @@ When the region is active offer to drop all contained stashes."
 (defun magit-stash-clear (ref)
   "Remove all stashes saved in REF's reflog by deleting REF."
   (interactive
-   (let ((ref (or (magit-section-when 'stashes) "refs/stash")))
-     (if (magit-confirm t (format "Drop all stashes in %s" ref))
-         (list ref)
-       (user-error "Abort"))))
+   (user-error "Abort"))
   (magit-run-git "update-ref" "-d" ref))
 
 ;;;###autoload
